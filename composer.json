@@ -1,0 +1,9 @@
+{
+	"autoload":
+	{
+		"psr-4": 
+		{
+			"ClanCats\\Station\\PHPServer": "src/"	
+		}
+	}
+}
