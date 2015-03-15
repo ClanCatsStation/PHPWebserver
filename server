@@ -31,5 +31,9 @@ $server = new Server( '127.0.0.1', $port );
 // start listening
 $server->listen( function( Request $request ) 
 {
-	return new Response( 'Hello World!' );
+	// print information that we recived the request
+	echo $request->method() . ' ' . $request->uri() . "\n";
+	
+	// return a response containing the request information
+	return new Response( '<pre>'.print_r( $request, true ).'</pre>' );
 });

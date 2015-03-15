@@ -3,7 +3,7 @@
 	{
 		"psr-4": 
 		{
-			"ClanCats\\Station\\PHPServer": "src/"	
+			"ClanCats\\Station\\PHPServer\\": "src/"	
 		}
 	}
 }
