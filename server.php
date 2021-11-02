@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+
 /*
  *---------------------------------------------------------------
  * Pure php webserver
@@ -14,14 +15,13 @@ use ClanCats\Station\PHPServer\Response;
 
 require 'vendor/autoload.php';
 
-// we never need the first argument
-array_shift($argv);
+$cliOption = getopt("p:", ['port:']);
 
-// the next argument should be the port if not use 80
-if (empty($argv)) {
-	$port = 80;
+// the next argument should be the port if not use 8000
+if (count($cliOption) === 0) {
+	$port = 8000;
 } else {
-	$port = array_shift($argv);
+	$port = $cliOption['port'] ?? $cliOption['p'];
 }
 
 // create a new server instance
