@@ -68,6 +68,7 @@ class Server
 		if (!socket_bind($this->socket, $this->host, $this->port)) {
 			throw new Exception('Could not bind: ' . $this->host . ':' . $this->port . ' - ' . socket_strerror(socket_last_error()));
 		}
+		echo("Server started on $this->host:$this->port" . PHP_EOL);
 	}
 
 	/**
