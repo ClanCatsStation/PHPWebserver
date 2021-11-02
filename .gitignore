@@ -1,4 +1,1 @@
-vendor/*
-vendor/autoload.php
-vendor/composer/autoload_psr4.php
-vendor/composer/autoload_real.php
+**/vendor/**

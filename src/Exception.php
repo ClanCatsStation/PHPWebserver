@@ -1,3 +1,7 @@
-<?php namespace ClanCats\Station\PHPServer;
+<?php
 
-class Exception extends \Exception {}
+namespace ClanCats\Station\PHPServer;
+
+class Exception extends \Exception
+{
+}

@@ -1,8 +1,10 @@
-<?php namespace ClanCats\Station\PHPServer;
+<?php
+
+namespace ClanCats\Station\PHPServer;
 
 use ClanCats\Station\PHPServer\Exception;
 
-class Request 
+class Request
 {
 	/**
 	 * The request method
@@ -10,59 +12,57 @@ class Request
 	 * @var string 
 	 */
 	protected $method = null;
-	
+
 	/**
 	 * The requested uri
 	 *
 	 * @var string
 	 */
 	protected $uri = null;
-	
+
 	/**
 	 * The request params
 	 *
 	 * @var array
 	 */
 	protected $parameters = [];
-	
+
 	/**
 	 * The request params
 	 *
 	 * @var array
 	 */
 	protected $headers = [];
-	
+
 	/**
 	 * Create new request instance using a string header
 	 *
 	 * @param string 			$header
 	 * @return Request
 	 */
-	public static function withHeaderString( $header )
+	public static function withHeaderString($header)
 	{
-		$lines = explode( "\n", $header );
-		
+		$lines = explode("\n", $header);
+
 		// method and uri
-		list( $method, $uri ) = explode( ' ', array_shift( $lines ) );
-		
+		list($method, $uri) = explode(' ', array_shift($lines));
+
 		$headers = [];
-		
-		foreach( $lines as $line )
-		{
+
+		foreach ($lines as $line) {
 			// clean the line
-			$line = trim( $line );
-			
-			if ( strpos( $line, ': ' ) !== false )
-			{
-				list( $key, $value ) = explode( ': ', $line );
+			$line = trim($line);
+
+			if (strpos($line, ': ') !== false) {
+				list($key, $value) = explode(': ', $line);
 				$headers[$key] = $value;
 			}
-		}	
-		
+		}
+
 		// create new request object
-		return new static( $method, $uri, $headers );
+		return new static($method, $uri, $headers);
 	}
-	
+
 	/**
 	 * Request constructor
 	 *
@@ -71,18 +71,18 @@ class Request
 	 * @param array 			$headers
 	 * @return void
 	 */
-	public function __construct( $method, $uri, $headers = [] ) 
+	public function __construct($method, $uri, $headers = [])
 	{
 		$this->headers = $headers;
-		$this->method = strtoupper( $method );
-		
+		$this->method = strtoupper($method);
+
 		// split uri and parameters string
-		@list( $this->uri, $params ) = explode( '?', $uri );
+		@list($this->uri, $params) = explode('?', $uri);
 
 		// parse the parmeters
-		parse_str( $params, $this->parameters );
+		parse_str($params, $this->parameters);
 	}
-	
+
 	/**
 	 * Return the request method
 	 *
@@ -92,7 +92,7 @@ class Request
 	{
 		return $this->method;
 	}
-	
+
 	/**
 	 * Return the request uri
 	 *
@@ -102,34 +102,32 @@ class Request
 	{
 		return $this->uri;
 	}
-	
+
 	/**
 	 * Return a request header
 	 *
 	 * @return string
 	 */
-	public function header( $key, $default = null )
+	public function header($key, $default = null)
 	{
-		if ( !isset( $this->headers[$key] ) )
-		{
+		if (!isset($this->headers[$key])) {
 			return $default;
 		}
-		
+
 		return $this->headers[$key];
 	}
-	
+
 	/**
 	 * Return a request parameter
 	 *
 	 * @return string
 	 */
-	public function param( $key, $default = null )
+	public function param($key, $default = null)
 	{
-		if ( !isset( $this->parameters[$key] ) )
-		{
+		if (!isset($this->parameters[$key])) {
 			return $default;
 		}
-		
+
 		return $this->parameters[$key];
 	}
 }
